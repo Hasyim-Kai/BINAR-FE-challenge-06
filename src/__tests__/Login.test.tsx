@@ -4,6 +4,13 @@ import LoginPage from "../pages/LoginPage";
 
 
 describe('Login Page Test', () => {
+    it('Should have Welcome text', () => {
+        render(<BrowserRouter><LoginPage /></BrowserRouter>);
+        const elemet = screen.getByText(/welcome, BCR Renters/i)
+        expect(elemet).toBeInTheDocument();
+        expect(elemet).toBeVisible();
+    })
+
     it('Should have email input field', () => {
         render(<BrowserRouter><LoginPage /></BrowserRouter>);
         const elemet = screen.getByPlaceholderText(/Contoh: johndee@gmail.com/i)
