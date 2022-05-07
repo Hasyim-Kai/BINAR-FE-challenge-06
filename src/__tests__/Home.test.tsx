@@ -4,18 +4,18 @@ import HomePage from "../pages/HomePage";
 
 
 describe('Home Page Test', () => {
+    const page: JSX.Element = <BrowserRouter><HomePage /></BrowserRouter>
     it('Should have Header Text', () => {
-        render(<BrowserRouter><HomePage /></BrowserRouter>);
-        const elemet = screen.getByPlaceholderText(/Sewa & Rental Mobil Terbaik di kawasan (Lokasimu)/i)
+        render(page);
+        const elemet = screen.getByText(/Sewa & Rental Mobil Terbaik di kawasan \(Lokasimu\)/i)
         expect(elemet).toBeInTheDocument();
         expect(elemet).toBeVisible();
     })
 
     it('Should have Car Image', () => {
-        render(<BrowserRouter><HomePage /></BrowserRouter>);
-        const carImage = screen.getByRole('img')
+        render(page);
         const elemet = screen.getByAltText(/Car/i)
         expect(elemet).toBeInTheDocument();
-        expect(carImage).toBeVisible();
+        expect(elemet).toBeVisible();
     })
 });
