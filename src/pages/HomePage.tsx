@@ -1,19 +1,17 @@
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import GreenButton from "../components/GreenButton";
 import Navbar from "../components/Navbar";
 
 export default function HomePage() {
-    // const history = useNavigate();
-    // const navigateToLogin = () => history('/');
+    const user = useSelector((state: any) => state.user)
+    const history = useNavigate();
+    const navigateToRegister = () => history('/');
 
-    // const checkUser = () => {
-    //     const token = localStorage.getItem('token')
-    //     if (!token) { navigateToLogin() }
-    // }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    useEffect(() => { if (!user.isLogged) navigateToRegister() }, [])
 
-    // // eslint-disable-next-line react-hooks/exhaustive-deps
-    // useEffect(() => checkUser(), [])
 
     const flexDisplay = `flex flex-col lg:flex-row gap-5 bg-backgroundGrey`;
 
@@ -24,7 +22,7 @@ export default function HomePage() {
                 <h2 className="text-4xl font-bold mb-4">Sewa & Rental Mobil Terbaik di kawasan (Lokasimu)</h2>
                 <p className="max-w-md">Selamat datang di Binar Car Rental. Kami menyediakan mobil kualitas
                     terbaik dengan harga terjangkau. Selalu siap melayani kebutuhanmuuntuk sewa mobil selama 24 jam.</p>
-                <GreenButton text="Mulai Sewa Mobil" additionalStyles="" />
+                <GreenButton text="Mulai Sewa Mobil" additionalStyles="mt-5" />
             </div>
             <img className="flex-1" src="./images/search_page_car.png" alt="Car" />
         </div>
