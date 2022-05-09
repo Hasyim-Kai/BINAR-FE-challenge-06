@@ -3,7 +3,7 @@ import persistReducer from 'redux-persist/lib/persistReducer';
 import persistStore from 'redux-persist/lib/persistStore';
 import storage from 'redux-persist/lib/storage';
 import thunk from 'redux-thunk'
-import carReducer from './car/carReducer';
+import userReducer from './user/userReducer';
 
 declare global {
   interface Window {
@@ -14,14 +14,13 @@ declare global {
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
-  car: carReducer
+  user: userReducer
 })
 
 const persistConfig = {
   key: 'root',
   storage
 }
-
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 const store: Store = createStore(

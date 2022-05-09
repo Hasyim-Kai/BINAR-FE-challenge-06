@@ -1,11 +1,8 @@
-type CarState = {
-   loading: boolean,
-   cars: [],
-   carDetail: {},
-   error: string
+type UserState = {
+   email: string, isLogged: boolean
 }
 
-interface CarActionTypes {
+interface UserActionTypes {
    type: string,
    payload: any
 }
