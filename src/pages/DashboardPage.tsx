@@ -1,18 +1,16 @@
 import { useEffect } from "react"
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar"
 import Sidebar from "../components/Sidebar"
 
 export default function Dashboard(): JSX.Element {
-    // const history = useNavigate();
-    // const navigateToLogin = () => history('/');
+    const user = useSelector((state: any) => state.user)
+    const history = useNavigate();
+    const navigateToRegister = () => history('/');
 
-    // const checkUser = () => {
-    //     const token = localStorage.getItem('token')
-    //     if (!token) { navigateToLogin() }
-    // }
-
-    // // eslint-disable-next-line react-hooks/exhaustive-deps
-    // useEffect(() => checkUser(), [])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    useEffect(() => { if (user.email !== 'admin@admin.com') navigateToRegister() }, [])
 
     return <div className="flex">
         <Sidebar />
