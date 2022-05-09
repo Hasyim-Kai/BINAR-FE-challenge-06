@@ -1,18 +1,38 @@
+import { signInWithPopup, UserCredential } from "firebase/auth";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { addUser } from "../redux/user/userAction";
+import { auth, googleAuthProvider } from "../services/firebase";
 
 export default function LoginPage(): JSX.Element {
+    const dispatch = useDispatch();
     const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    const handleEmailChange = (event: any) => { setEmail(event.target.value) }
+
     const history = useNavigate();
     const navigateToDashboard = () => history('/admin');
     const navigateToHome = () => history('/home');
 
-    const handleEmailChange = (event: any) => { setEmail(event.target.value) }
+    const signInWithGoogle = async () => {
+        try {
+            const response: UserCredential = await signInWithPopup(auth, googleAuthProvider);
+            dispatch(addUser(response.user.email));
+            navigateToHome();
+        } catch (err) {
+            console.error(err);
+        }
+    };
 
     const handleSubmit = (event: any) => {
         event.preventDefault();
-        email === `admin@admin.com` ? navigateToDashboard() : navigateToHome();
+        if (email === `admin@admin.com`) {
+            dispatch(addUser(email));
+            navigateToDashboard();
+        } else {
+            dispatch(addUser(email));
+            navigateToHome();
+        }
     }
 
     const tailwindTransition = `transition-all duration-300 ease-in-out`;
@@ -35,8 +55,8 @@ export default function LoginPage(): JSX.Element {
                 </div>
                 <button type="submit" className={`mt-5 p-3 text-white bg-darkblue rounded cursor-pointer hover:text-xl ${tailwindTransition}`}>Sign In</button>
                 <hr className="mt-8" />
-                <button className={`mt-3 p-3 font-semibold cursor-pointer hover:text-xl ${tailwindTransition}`}><img className="inline-block mr-3" src="images/icons/google-logo.svg" alt="Google Logo" />Login with Google</button>
             </form>
+            <button onClick={signInWithGoogle} className={`mx-auto flex mt-3 p-3 font-semibold cursor-pointer hover:text-xl ${tailwindTransition}`}><img className="inline-block mr-3" src="images/icons/google-logo.svg" alt="Google Logo" />Login with Google</button>
         </div>
     </div>
 }
