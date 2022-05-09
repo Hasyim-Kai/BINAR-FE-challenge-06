@@ -14,5 +14,5 @@
 ![Admin Page](./public/images/screenshot/ss-desktop-admin-page.png)
 <br>
 ## :star: Home Page
-![Home Page](./public/images/screenshot/ss-desktop-home-page.png)
+![Home Page](./public/images/screenshot/ss-desktop-home-page.PNG)
 <br>
