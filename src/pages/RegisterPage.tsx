@@ -1,13 +1,20 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { addUser } from "../redux/user/userAction";
 
 export default function RegisterPage(): JSX.Element {
+   const dispatch = useDispatch();
    const history = useNavigate();
    const navigateToHome = () => history('/home');
+
+   const [email, setEmail] = useState('')
+   const handleEmailChange = (event: any) => { setEmail(event.target.value) }
 
    const handleSubmit = (event: any) => {
       event.preventDefault();
       navigateToHome();
+      dispatch(addUser(email));
       alert('Register Success');
    }
 
@@ -23,7 +30,7 @@ export default function RegisterPage(): JSX.Element {
          <form onSubmit={handleSubmit} className={`flex flex-col`}>
             <div className="mb-6">
                <label className="text-lg">Email</label>
-               <input type="email" className={inputStyle} placeholder="Contoh: johndee@gmail.com" required />
+               <input type="email" className={inputStyle} placeholder="Contoh: johndee@gmail.com" required onChange={handleEmailChange} />
             </div>
             <div className="mb-6">
                <label className="text-lg">Password</label>
