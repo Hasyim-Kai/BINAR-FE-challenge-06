@@ -47,11 +47,13 @@ export default function LoginPage(): JSX.Element {
             <form onSubmit={handleSubmit} className={`flex flex-col`}>
                 <div className="mb-6">
                     <label className="text-lg">Email</label>
-                    <input type="email" className={inputStyle} placeholder="Contoh: johndee@gmail.com" required onChange={handleEmailChange} />
+                    <input type="email" className={inputStyle} placeholder="Contoh: johndee@gmail.com" required onChange={handleEmailChange}
+                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Must formatted as an Email. Example : myemail@laptop.com" />
                 </div>
                 <div className="mb-6">
                     <label className="text-lg">Password</label>
-                    <input type="password" className={inputStyle} placeholder="6+ karakter" required />
+                    <input type="password" className={inputStyle} placeholder="6+ karakter" required
+                        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" title="Must contain at least One number and One uppercase and lowercase letter, and at least 6 or more characters" />
                 </div>
                 <button type="submit" className={`mt-5 p-3 text-white bg-darkblue rounded cursor-pointer hover:text-xl ${tailwindTransition}`}>Sign In</button>
                 <hr className="mt-8" />
