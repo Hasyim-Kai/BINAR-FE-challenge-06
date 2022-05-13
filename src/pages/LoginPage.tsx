@@ -1,11 +1,12 @@
 import { signInWithPopup, UserCredential } from "firebase/auth";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { addUser } from "../redux/user/userAction";
 import { auth, googleAuthProvider } from "../services/firebase";
 
 export default function LoginPage(): JSX.Element {
+    const user = useSelector((state: any) => state.user)
     const dispatch = useDispatch();
     const [email, setEmail] = useState('')
     const handleEmailChange = (event: any) => { setEmail(event.target.value) }
@@ -35,11 +36,17 @@ export default function LoginPage(): JSX.Element {
         }
     }
 
+    useEffect(() => {
+        console.log(user.isLogged && user.email === 'admin@admin.com')
+        if (user.isLogged && user.email === 'admin@admin.com') {navigateToDashboard() }
+        else if (user.isLogged) navigateToHome() 
+     }, [])
+
     const tailwindTransition = `transition-all duration-300 ease-in-out`;
     const inputStyle = "border border-gray-300 rounded block w-full p-2.5 mt-2";
 
     return <div className="flex flex-col lg:flex-row lg:items-center bg-white">
-        <img className="lg:w-8/12 lg:h-screen" src="images/car_login.png" alt="Cars" />
+        <img className="lg:w-8/12 lg:h-full" src="images/car_login.png" alt="Cars" />
         <div className={`grow p-14`}>
             <img className="w-36" src="images/logo2.png" alt="logo2" />
             <h3 className="my-12 text-3xl"><b>Welcome, BCR Renters</b></h3>
@@ -58,7 +65,7 @@ export default function LoginPage(): JSX.Element {
                 <button type="submit" className={`mt-5 p-3 text-white bg-darkblue rounded cursor-pointer hover:text-xl ${tailwindTransition}`}>Sign In</button>
                 <hr className="mt-8" />
             </form>
-            <button onClick={signInWithGoogle} className={`mx-auto flex mt-3 p-3 font-semibold cursor-pointer hover:text-xl ${tailwindTransition}`}><img className="inline-block mr-3" src="images/icons/google-logo.svg" alt="Google Logo" />Login with Google</button>
+            <button onClick={signInWithGoogle} className={`mx-auto flex items-center mt-3 p-3 font-semibold cursor-pointer hover:text-xl ${tailwindTransition}`}><img className="inline-block mr-3" src="images/icons/google-logo.svg" alt="Google Logo" />Login with Google</button>
         </div>
     </div>
 }

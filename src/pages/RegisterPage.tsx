@@ -1,12 +1,14 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { addUser } from "../redux/user/userAction";
 
 export default function RegisterPage(): JSX.Element {
-   const dispatch = useDispatch();
+    const user = useSelector((state: any) => state.user)
+    const dispatch = useDispatch();
    const history = useNavigate();
    const navigateToHome = () => history('/home');
+   const navigateToDashboard = () => history('/admin');
 
    const [email, setEmail] = useState('')
    const handleEmailChange = (event: any) => { setEmail(event.target.value) }
@@ -18,13 +20,18 @@ export default function RegisterPage(): JSX.Element {
       alert('Register Success');
    }
 
+   useEffect(() => {
+      if (user.isLogged && user.email === 'admin@admin.com') {navigateToDashboard()} 
+      else if (user.isLogged) navigateToHome() 
+   }, [])
+   
    const tailwindTransition = `transition-all duration-300 ease-in-out`;
    const inputStyle = "border border-gray-300 rounded block w-full p-2.5 mt-2";
 
    return <div className="flex flex-col lg:flex-row lg:items-center bg-white">
-      <img className="lg:w-8/12 lg:h-screen" src="images/car_login.png" alt="Cars" />
+      <img className="lg:w-8/12 lg:h-full" src="images/car_login.png" alt="Cars" />
       <div className={`grow p-14`}>
-         <img className="w-36" src="images/logo2.png" alt="logo2" />
+         <img className="w-36 h-full" src="images/logo2.png" alt="logo2" />
          <h3 className="my-12 text-3xl"><b>Create new Account</b></h3>
 
          <form onSubmit={handleSubmit} className={`flex flex-col`}>

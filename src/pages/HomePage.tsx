@@ -10,7 +10,9 @@ export default function HomePage() {
     const navigateToRegister = () => history('/');
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    useEffect(() => { if (!user.isLogged) navigateToRegister() }, [])
+    useEffect(() => {
+         if (!user.isLogged) navigateToRegister() 
+        }, [])
 
 
     const flexDisplay = `flex flex-col lg:flex-row gap-5 bg-backgroundGrey`;
