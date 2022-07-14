@@ -3,12 +3,12 @@ import { signOut, getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-   apiKey: "AIzaSyB0BkIYfKFOwtGP6GyrosG8WXmJ8jG5Byw",
-   authDomain: "binar-fe-challenge-06.firebaseapp.com",
-   projectId: "binar-fe-challenge-06",
-   storageBucket: "binar-fe-challenge-06.appspot.com",
-   messagingSenderId: "552884007900",
-   appId: "1:552884007900:web:ef3fe9358a7e65c9901519"
+   apiKey: "aaaaaa",
+   authDomain: "aaaaaaaaa",
+   projectId: "bbbbbbbbbbbbbbb",
+   storageBucket: "cccccccccccccccc",
+   messagingSenderId: "sssssssssssssssssss",
+   appId: "zxxxxxxxxxxx"
 };
 
 // Initialize Firebase
